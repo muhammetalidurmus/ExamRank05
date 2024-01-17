@@ -1,5 +1,5 @@
-Assignment name  : cpp_module00
-Expected files   : Warlock.cpp Warlock.hpp
+Klasör Adı  : cpp_module00
+Gerekli Dosyalar   : Warlock.cpp Warlock.hpp
 --------------------------------------------------------------------------------
 
 Bir Warlock sınıfı oluşturun. Bu sınıf Coplien formunda olmalıdır.
