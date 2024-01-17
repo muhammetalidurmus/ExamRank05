@@ -1,0 +1,80 @@
+Klasör Adı  : cpp_module02
+Gerekli Dosyalar   : 		Warlock.cpp Warlock.hpp
+                   		ASpell.hpp ASpell.cpp
+				ATarget.hpp ATarget.cpp
+				Fwoosh.hpp Fwoosh.cpp
+				Dummy.hpp Dummy.cpp
+				Fireball.hpp Fireball.cpp
+				Polymorph.hpp Polymorph.cpp
+				BrickWall.hpp BrickWall.cpp
+				SpellBook.hpp SpellBook.cpp
+				TargetGenerator.hpp TargetGenerator.cpp
+--------------------------------------------------------------------------------
+
+Warlock, SpellBook ve TargetGenerator sınıflarında switch ifadesi YASAKTIR ve kullanılması -42 sonucunu doğuracaktır.
+
+Fwoosh gibi aynı modelde iki büyü oluşturun:
+
+Fireball (Ad: "Fireball", Etkiler: "burnt to a crisp")
+Polymorph (Ad: "Polymorph", Etkiler: "turned into a critter")
+Bunun yanı sıra, sadece bir mankeni saldırmak için olmaması için ona saldırabileceği yeni bir hedef yapalım. Bu da BrickWall olacak (Tip: "Inconspicuous Red-brick Wall").
+
+Şimdi, kopyalanamaz veya kopya ile örneklendirilemeyen kanonik formda bir SpellBook sınıfı oluşturun. Aşağıdaki işlevlere sahip olacak:
+
+void learnSpell(ASpell*), kitapta bir büyüyü KOPEYLER
+void forgetSpell(string const &), kitaptan bir büyüyü siler, ancak
+eğer orada değilse bir şey yapmaz
+ASpell* createSpell(string const &), adı verilen bir büyünün adını alır,
+onu oluşturur ve geri döndürür.
+Şimdi Warlock'u değiştirin, artık yanında oluşturulan ve yok edilen bir büyü kitabına sahip olacak. Ayrıca, learnSpell ve forgetSpell fonksiyonlarını büyü kitabınınkileri çağırmak için kullanın.
+
+launchSpell fonksiyonu, SpellBook'u kullanarak başlatmaya çalıştığı büyüyü oluşturmalıdır.
+
+Kanonik formda ve önceki gibi, kopyalanamaz olan TargetGenerator sınıfını oluşturun.
+
+Aşağıdaki işlevlere sahip olacak:
+
+void learnTargetType(ATarget*), üreteciye bir hedef öğretir
+void forgetTargetType(string const &), üreticinin bir hedef türünü unutmasını sağlar
+eğer biliniyorsa
+ATarget* createTarget(string const &), belirtilen türde bir hedef oluşturur
+Nihayet, işte bir test main fonksiyonu. Çok kapsamlı değil, bu nedenle kendi testlerinizi de yapmaktan emin olun.
+
+cpp
+Copy code
+int main()
+{
+  Warlock richard("Richard", "foo");
+  richard.setTitle("Hello, I'm Richard the Warlock!");
+  BrickWall model1;
+
+  Polymorph* polymorph = new Polymorph();
+  TargetGenerator tarGen;
+
+  tarGen.learnTargetType(&model1);
+  richard.learnSpell(polymorph);
+
+  Fireball* fireball = new Fireball();
+
+  richard.learnSpell(fireball);
+
+  ATarget* wall = tarGen.createTarget("Inconspicuous Red-brick Wall");
+
+  richard.introduce();
+  richard.launchSpell("Polymorph", *wall);
+  richard.launchSpell("Fireball", *wall);
+}
+~$ ./a.out | cat -e
+Richard: This looks like another boring day.$
+Richard: I am Richard, Hello, I'm Richard the Warlock!!$
+Inconspicuous Red-brick Wall has been turned into a critter!$
+Inconspicuous Red-brick Wall has been burnt to a crisp!$
+Richard: My job here is done!$
+~$
+
+
+
+
+
+
+
